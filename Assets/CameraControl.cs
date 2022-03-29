@@ -11,10 +11,13 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.AddComponent<BezierWalkerWithSpeed>();
         beziers = new GameObject().AddComponent<BezierSpline>();
         withSpeed = GetComponent<BezierWalkerWithSpeed>();
         withSpeed.spline = beziers;
         beziers.Initialize(3);
+        withSpeed.enabled = false;
+
         //transform.position = Points[4].transform.position;
         //transform.LookAt(Points[5].transform.position);
 
@@ -26,7 +29,7 @@ public class CameraControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             SetCameraPos(0);
-
+               
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
@@ -51,14 +54,15 @@ public class CameraControl : MonoBehaviour
     }
     public void SetCameraPos(int index)
     {
-        withSpeed.enabled = true;
         Vector3 end = Points[index].transform.position;
         //transform.position = Points[index].transform.GetChild(0).position;
         beziers[0].position = transform.position;
         beziers[1].position = GetControlVector(transform.position,end);
 
         beziers[beziers.Count-1].position = end;
-        withSpeed.Execute(1);
+        withSpeed.enabled = true;
+
+        withSpeed.NormalizedT = 0;
         transform.LookAt(Points[5].transform.position);
     }
     Vector3 GetControlVector(Vector3 startPoint,Vector3 EndPoint) 
@@ -67,6 +71,7 @@ public class CameraControl : MonoBehaviour
         MidPos.y = 0.505f;
         MidPos *= 0.5f;
        Vector3 dir = MidPos - Points[5].transform.position;
+        dir.y = 0;
         MidPos += dir.normalized * 5;
         return MidPos;
     }
