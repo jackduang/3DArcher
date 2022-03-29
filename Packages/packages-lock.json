@@ -130,6 +130,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.yasirkula.beziersolution": {
+      "version": "https://github.com/yasirkula/UnityBezierSolution.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6e4e8efd087ea4b5aed814f44c051b34e7399491"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
