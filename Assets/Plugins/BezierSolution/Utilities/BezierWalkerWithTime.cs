@@ -30,7 +30,7 @@ namespace BezierSolution
 
 		public LookAtMode lookAt = LookAtMode.Forward;
 
-		private bool isGoingForward = true;
+		public bool isGoingForward = false;
 		public override bool MovingForward { get { return isGoingForward; } }
 
 		public UnityEvent onPathCompleted = new UnityEvent();
@@ -39,6 +39,7 @@ namespace BezierSolution
 
 		private void Update()
 		{
+			transform.LookAt(transform.parent);
 			Execute( Time.deltaTime );
 		}
 
