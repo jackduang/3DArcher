@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class UIControl : MonoBehaviour
 {
     GameObject ConnetUI;
     bool down = true;
+    string defultHost = "localhost";
     private void Awake()
     {
         ConnetUI = GameObject.Find("ConnetSet");
+        //GameObject.Find("Address").GetComponent<Text>().text = defultHost;
     }
     // Start is called before the first frame update
     void Start()

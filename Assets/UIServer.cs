@@ -31,8 +31,8 @@ public class UIServer : MonoBehaviour
     }
     public void ConnectedToServer()
     {
-        manager.StartClient();
         manager.networkAddress = GameObject.Find("Address").GetComponent<Text>().text;
+        manager.StartClient();
     }
     public void stopClent()
     {
