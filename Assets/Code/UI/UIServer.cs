@@ -28,36 +28,32 @@ public class UIServer : MonoBehaviour
         {
             manager.StartHost();
         }
+        gameObject.SetActive(false);
     }
     public void ConnectedToServer()
     {
         manager.networkAddress = GameObject.Find("Address").GetComponent<Text>().text;
         manager.StartClient();
+        gameObject.SetActive(false);
+
     }
     public void stopClent()
     {
         if (NetworkServer.active && NetworkClient.isConnected)
         {
-            if (GUILayout.Button("Stop Host"))
-            {
-                manager.StopHost();
-            }
+            manager.StopHost();
         }
         // stop client if client-only
         else if (NetworkClient.isConnected)
         {
-            if (GUILayout.Button("Stop Client"))
-            {
-                manager.StopClient();
-            }
+            manager.StopClient();
         }
         // stop server if server-only
         else if (NetworkServer.active)
         {
-            if (GUILayout.Button("Stop Server"))
-            {
-                manager.StopServer();
-            }
+            manager.StopServer();
         }
+        gameObject.SetActive(false);
+
     }
 }

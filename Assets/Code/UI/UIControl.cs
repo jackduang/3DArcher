@@ -23,13 +23,13 @@ public class UIControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if(down)
-                ConnetUI.transform.DOLocalMoveY(82, 0.75f);
-            else
-                ConnetUI.transform.DOLocalMoveY(790, 0.75f);
-            down = !down;
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    if(down)
+        //        ConnetUI.transform.DOLocalMoveY(82, 0.75f);
+        //    else
+        //        ConnetUI.transform.DOLocalMoveY(790, 0.75f);
+        //    down = !down;
+        //}
     }
 }
