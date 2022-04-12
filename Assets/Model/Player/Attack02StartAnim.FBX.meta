@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2ba9ddd8d94014d4c8113e934477259d
+guid: 7a82ce1b94b45104d935c11d370d7f96
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 8993902097722301239
-    second: Run
+    second: Attack02StartAnim
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
+      name: Attack02StartAnim
       takeName: Unreal Take
       internalID: 0
       firstFrame: 0
-      lastFrame: 24
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

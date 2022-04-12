@@ -6,8 +6,13 @@ using DG.Tweening;
 public class PlayerControl : MonoBehaviour
 {
     public LayerMask layer;
-    public float rotaSpeed = 0.5f;
-    public float MoveSpeed = 10;
+    public float ArrowRotaSpeed = 0.5f;
+    public float RotaSpeed = 0.4f;
+    public float MoveSpeed = 250;
+    public float Gravity = 20;
+    public float jumpSpeed = 10;
+
+    private CharacterController _characterController;
     public Animator anima;
     Rigidbody rig;
     Transform arrow;
@@ -16,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     float V = 0;
     private void Awake()
     {
+        _characterController = GetComponent<CharacterController>();
         rig = GetComponent<Rigidbody>();
         arrow = transform.Find("Arrow");
     }
@@ -29,18 +35,38 @@ public class PlayerControl : MonoBehaviour
     {
         H = Input.GetAxis("Horizontal");
         V = Input.GetAxis("Vertical");
+        print(V);
+        
+        if(V!=0) anima.SetBool("Run", true);
+        else anima.SetBool("Run", false);
+
         Ray ra = Camera.main.ScreenPointToRay(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
         var ph = Physics.Raycast(ra,out RaycastHit raycastHit,1000, layer);
         if (!ph) return;
         Vector3 dir = raycastHit.point;
         dir.y = transform.position.y;
-        arrow.DOLookAt(dir, rotaSpeed);
+        arrow.DOLookAt(dir, ArrowRotaSpeed);
     }
+    Vector3 _moveDirection;
+
     private void FixedUpdate()
     {
-        print(arrow.forward * V * MoveSpeed);
-        rig.AddForce(arrow.forward*V* MoveSpeed, ForceMode.VelocityChange);
-        anima.SetFloat("Speed", rig.velocity.z);
+        if (_characterController.isGrounded)
+        {
+            _moveDirection = new Vector3(H, 0, 0);
+            // 跳跃
+            if (Input.GetButton("Jump"))
+                _moveDirection.y = jumpSpeed;
+        }
+        _moveDirection.y -= Gravity * Time.deltaTime;
+        if (V != 0)
+        {
+            transform.GetChild(0).DOLookAt(transform.Find("Arrow/LookPoint").position,RotaSpeed);
+
+           rig.MovePosition(transform.position+arrow.forward * MoveSpeed * Time.fixedDeltaTime);
+        }
+       // _characterController.Move(_moveDirection * MoveSpeed * Time.deltaTime);
+
         // transform.forward = 
     }
 }
