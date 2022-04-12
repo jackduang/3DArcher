@@ -62,10 +62,10 @@ public class PlayerControl : MonoBehaviour
         if (V != 0)
         {
             transform.GetChild(0).DOLookAt(transform.Find("Arrow/LookPoint").position,RotaSpeed);
-
-           rig.MovePosition(transform.position+arrow.forward * MoveSpeed * Time.fixedDeltaTime);
+            _moveDirection += arrow.forward;
+          // rig.MovePosition(transform.position+arrow.forward * MoveSpeed * Time.fixedDeltaTime);
         }
-       // _characterController.Move(_moveDirection * MoveSpeed * Time.deltaTime);
+        _characterController.Move(_moveDirection * MoveSpeed * Time.fixedDeltaTime);
 
         // transform.forward = 
     }
