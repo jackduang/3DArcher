@@ -47,26 +47,24 @@ public class PlayerControl : MonoBehaviour
         dir.y = transform.position.y;
         arrow.DOLookAt(dir, ArrowRotaSpeed);
     }
-    Vector3 _moveDirection;
 
     private void FixedUpdate()
     {
-        if (_characterController.isGrounded)
-        {
-            _moveDirection = new Vector3(H, 0, 0);
-            // 跳跃
-            if (Input.GetButton("Jump"))
-                _moveDirection.y = jumpSpeed;
-        }
-        _moveDirection.y -= Gravity * Time.deltaTime;
         if (V != 0)
         {
-            transform.GetChild(0).DOLookAt(transform.Find("Arrow/LookPoint").position,RotaSpeed);
-            _moveDirection += arrow.forward;
-          // rig.MovePosition(transform.position+arrow.forward * MoveSpeed * Time.fixedDeltaTime);
-        }
-        _characterController.Move(_moveDirection * MoveSpeed * Time.fixedDeltaTime);
+            transform.GetChild(0).DOLookAt(transform.Find("Arrow/LookPoint").position, RotaSpeed);
+            _characterController.SimpleMove(arrow.forward * MoveSpeed);
 
-        // transform.forward = 
+            //rig.MovePosition(transform.position+arrow.forward * MoveSpeed * Time.fixedDeltaTime);
+        }
+        if (_characterController.isGrounded)
+        {
+            // 跳跃
+            if (Input.GetButton("Jump"))
+            {
+                rig.AddForce(jumpSpeed * new Vector3(0, 100, 0));
+                print("Jump");
+            }
+        }
     }
 }
